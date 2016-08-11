@@ -1,0 +1,8 @@
+Welcome<br> 
+Home<br>
+Sign in<br>
+Sign up<br>
+
+<%= @user.email %>
+
+<%= link_to "Sign out", destroy_user_session_path, action: :destroy, method: :delete %> 
