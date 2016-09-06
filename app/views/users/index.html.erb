@@ -1,4 +1,6 @@
+<% if current_user %>
 <% @users.each do |x| %>
-<%= x.name %>
 <%= x.email %>
 <% end %>
+<% end %>
+

@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 
+  before_action :authenticate_user!
   def update
     @post = Post.find_by(id: params[:id])
     return head(:forbidden) unless current_user.try(:id) == @post.id
