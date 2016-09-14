@@ -1,0 +1,5 @@
+<p>
+<% if current_user.id == user.id || current_user.admin? %>
+<%= user.name_out_of_email %>, <%= user.email %>
+<% end %>
+</p>

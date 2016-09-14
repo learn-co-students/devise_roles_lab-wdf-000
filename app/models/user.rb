@@ -6,4 +6,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   enum role: [:user, :vip, :admin]
   has_many :posts
+
+
+  def name_out_of_email
+    self.email.split(/\W/)[0].capitalize
+  end
 end

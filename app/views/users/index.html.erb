@@ -1,5 +1,8 @@
-Welcome
+<h3>Welcome, <%= current_user.nil? ? "Stranger" : current_user.name_out_of_email %>!</h3>
 
-<% @users.each do |user|%>
-  <%= user.name %>, <%= user.email if current_user = user %>
+You have access to the following accounts:
+<% if !current_user.nil? %>
+  <% @users.each do |user|%>
+    <%= render partial: "user", locals: {user: user} %>
+  <% end %>
 <% end %>

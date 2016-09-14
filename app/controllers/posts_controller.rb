@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :owner_or_higher_up, only: [:update]
 
   def index
-    
+    @posts = Post.all
   end
 
   def new
