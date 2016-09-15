@@ -1,27 +1,53 @@
 describe PostsController do
 
-  #### Requirements for the PostsController
-  # Posts can be created by any user
-  # Anyone can read any post
-  # Users can edit or delete Posts they own
-  # VIPs can edit anyone's Posts
-  # Admins can do anything to any post.
-
-
   describe '#index' do
-     
+       # Anyone can read any post
   end
 
   describe '#show' do
-
+      # Anyone can read any post
   end
 
   describe '#create' do
+    context 'regular user' do
+      before do
+        sign_in!
+      end
+      it 'allows creating a new post' do
+        post :create, post: { content: 'repetitio ad nauseam' }
+        expect(Post.find_by(content: 'repetitio ad nauseam').content).to eq('repetitio ad nauseam')
+      end
+    end
+    context 'vip user' do
+      before do
+        sign_in!('vip')
+      end
+      it 'allows creating a new post' do
+        post :create, post: { content: 'repetitio ad nauseam' }
+        expect(Post.find_by(content: 'repetitio ad nauseam').content).to eq('repetitio ad nauseam')
+      end
+    end
+    context 'admin user' do
+      before do
+        sign_in!('admin')
+      end
+      it 'allows creating a new post' do
+        post :create, post: { content: 'repetitio ad nauseam' }
+        expect(Post.find_by(content: 'repetitio ad nauseam').content).to eq('repetitio ad nauseam')
+      end
+    end
 
+    context 'someone who has not logged on' do
+      it 'can not create a new post' do
+        post :create, post: { content: 'repetitio ad nauseam' }
+        expect(Post.find_by(content: 'repetitio ad nauseam')).to eq(nil)
+      end
+    end
   end
 
   describe '#destroy' do
-
+  # Users can edit or delete Posts they own
+    # Admins can do anything to any post.
   end
 
   describe '#update' do
