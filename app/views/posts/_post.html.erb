@@ -1,7 +1,10 @@
 <p>
-<%= post.content %>, <br>
+<%= post.content %> <br>
 Written by: <%= post.user.name_out_of_email %> <br>
 <% if current_user.id == post.user.id || current_user.admin? || current_user.vip? %>
   <%= link_to "Edit Post", edit_post_path(post)%>
 <% end %>
+<% if current_user.id == post.user.id || current_user.admin? %>
+  <%= link_to "Delete Post", post_path(post), method: :delete %>
+  <% end %>
 </p>
