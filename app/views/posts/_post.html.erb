@@ -1,0 +1,7 @@
+<p>
+<%= post.content %>, <br>
+Written by: <%= post.user.name_out_of_email %> <br>
+<% if current_user.id == post.user.id || current_user.admin? || current_user.vip? %>
+  <%= link_to "Edit Post", edit_post_path(post)%>
+<% end %>
+</p>

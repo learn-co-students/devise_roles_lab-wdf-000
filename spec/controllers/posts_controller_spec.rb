@@ -1,5 +1,6 @@
 describe PostsController do
 
+
   describe '#index' do
        # Anyone can read any post
   end
@@ -46,8 +47,50 @@ describe PostsController do
   end
 
   describe '#destroy' do
-  # Users can edit or delete Posts they own
-    # Admins can do anything to any post.
+    context 'regular user' do
+      before do
+        sign_in!
+      end
+      it 'does not allow destroying other posts' do
+        created_post = Post.create(content: 'look at _my_ post!', user_id: 999)
+        expect {
+          delete :destroy, id: created_post.id
+        }.not_to change(Post, :count)
+      end
+    end
+    context 'vip user' do
+      before do
+        sign_in!('vip')
+      end
+      it 'does not allow destroying other posts' do
+        created_post = Post.create(content: 'look at _my_ post!', user_id: 999)
+        expect {
+          delete :destroy, id: created_post.id
+        }.not_to change(Post, :count)
+      end
+    end
+    context 'admin user' do
+      before do
+        sign_in!('admin')
+      end
+      it 'allows destroying other posts' do
+        created_post = Post.create(content: 'look at _my_ post!', user_id: 999)
+        expect {
+          delete :destroy, id: created_post.id
+        }.to change(Post, :count).by(-1)
+      end
+    end
+    context 'same user' do
+      before do
+        sign_in!
+      end
+      it 'allows destroying own posts' do
+        post :create, post: { content: 'this is my post!' }
+        created_post = Post.find_by(content: 'this is my post!')
+        delete :destroy, id: created_post.id
+        expect(Post.find_by(content: 'repetitio ad nauseam')).to eq(nil)
+      end
+    end
   end
 
   describe '#update' do
