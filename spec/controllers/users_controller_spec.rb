@@ -1,3 +1,4 @@
+
 describe UsersController do
   describe '#destroy' do
     context 'neither admin nor vip' do
