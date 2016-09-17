@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :owner_or_higher_up, only: [:update]
   before_action :owner_or_admin, only: [:destroy]
   # before_action :require_login, only: [:new, :create]
-  before_action :authenticate_user!, only: [:new, :create, :index, :show]
+  before_action :authenticate_user!, only: [:new, :create, :show]
 
   def index
     @posts = Post.all
@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.create(post_params)
+    post = Post.create(post_params(:content, :user_id))
     redirect_to post_path(post)
   end
 
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
 
   def update
     post = Post.find_by_id(params[:id])
-    post.update(post_params)
+    post.update(post_params(:content))
     redirect_to post_path(post)
   end
 
@@ -56,8 +56,8 @@ class PostsController < ApplicationController
     end
   end
 
-  def post_params
-    params.require(:post).permit(:content, :user_id)
+  def post_params(*args)
+    params.require(:post).permit(*args)
   end
 
 end

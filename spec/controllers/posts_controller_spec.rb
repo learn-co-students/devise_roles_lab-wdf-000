@@ -2,17 +2,19 @@ require 'spec_helper'
 require 'rails_helper'
 describe PostsController do
 
-  # describe '#show' do
-  #
-  #   context 'any user' do
-  #     before do
-  #       sign_in!
-  #     end
-  #     created_post = Post.create(content: 'this post is about beef jerky', user_id: 999)
-  #     # visit posts_path <<= this test is probably in the wrong folder for this method or the page object call to work
-  #     expect(page).to have_content 'this post is about beef jerky'
-  #   end
-  # end
+  describe '#show & #index' do #Combined as these pages use the same partial, anyway
+    render_views  #This line is required for capybara to actually render the page
+    context 'any user', type: :feature do #type::feature needed to be able to run 'visit' outside of spec/features-directory
+
+      it 'allows any user to see any post' do
+        created_post = Post.create(content: 'this post is about beef jerky', user: FactoryGirl.create(:user))
+        user = FactoryGirl.create(:user)
+        sign_in(user.email, user.password)
+        visit posts_path
+        expect(page).to have_content 'this post is about beef jerky'
+      end
+    end
+  end
 
   describe '#create' do
     context 'any user' do
@@ -126,9 +128,9 @@ describe PostsController do
         sign_in!
       end
       it 'allows the request' do
-        post :create, post: { content: 'my post!', user_id: 1 }
+        post :create, post: { content: 'my post!', user_id: 1  }
         created_post = Post.find_by(content: 'my post!')
-        post :update, id: created_post.id, post: { content: 'Hear me ROAR!' }
+        post :update, id: created_post.id, post: { content: 'Hear me ROAR!'}
         expect(created_post.reload.content).to eq('Hear me ROAR!')
       end
     end

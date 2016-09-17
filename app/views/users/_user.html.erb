@@ -1,5 +1,8 @@
 <p>
-<% if current_user.id == user.id || current_user.admin? %>
-<%= user.name_out_of_email %>, <%= user.email %>
-<% end %>
+  <% if current_user.id == user.id || current_user.admin? %>
+    <%= user.name_out_of_email %>, <%= user.email %>
+  <% end %>
+  <% if current_user.admin? %>
+    <%= link_to "Delete User", user_path(user), method: :delete %>
+  <% end %>
 </p>

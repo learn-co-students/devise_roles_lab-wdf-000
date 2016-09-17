@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def destroy
       user = User.find_by_id(params[:id])
       user.destroy
-      flash[:message] = "User deleted. Are you sure you aren't abusing your powers?"
+      flash[:sassy] = "User deleted. Are you sure you aren't abusing your powers, Boss?"
       redirect_to '/'
   end
 

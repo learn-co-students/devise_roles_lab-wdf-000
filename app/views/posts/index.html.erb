@@ -1,3 +1,5 @@
+
+<p>You found the index page! :o</p>
 <% if !current_user.nil? %>
   <% @posts.each do |post|%>
     <%= render partial: "post", locals: {post: post} %>
