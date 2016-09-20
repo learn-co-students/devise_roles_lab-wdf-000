@@ -17,7 +17,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'pry'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
@@ -29,3 +28,4 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
 end
+gem 'pry'

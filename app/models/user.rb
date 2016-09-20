@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  # validates :name, :presence => true, :uniqueness => { :case_sensitive => false }
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
-  # validates :name, :presence => true, :uniqueness => { :case_sensitive => false }
 
   def set_default_role
     self.role ||= :user
