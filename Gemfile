@@ -10,13 +10,14 @@ gem 'sqlite3'
 
 group :development do
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'web-console'
 end
 
 group :development, :test do
-  gem 'byebug'
+  gem 'pry-rails'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
