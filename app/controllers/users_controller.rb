@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:show]
+
   def index
     @users = User.all
   end
@@ -10,14 +11,6 @@ class UsersController < ApplicationController
     if current_user.id != params[:id].to_i
       redirect_to root_path, alert: 'Access denied.'
     end
-  end
-
-  def update
-    # if current_user.admin?
-    #   user = User.find_by(id: params[:id])
-    #   user.update
-    # end
-    # redirect_to '/'
   end
 
   def destroy

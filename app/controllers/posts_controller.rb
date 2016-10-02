@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
-  def index
-  end
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def new
+    @post = Post.new
   end
 
   def create
@@ -29,5 +29,9 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:content)
+  end
+
+  def set_post
+    @post = Post.find_by(id: params[:id])
   end
 end
