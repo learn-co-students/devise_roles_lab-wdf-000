@@ -1,1 +1,12 @@
-<h1>Users Index view</h1>
+<% if user_signed_in? %>
+  <ul>
+    <% @users.each do |user| %>
+      <li>
+        <%= user.email %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <h1> Welcome! </h1>
+  <%= "There are #{@users.count} registered users." %>
+<% end %>
