@@ -9,18 +9,25 @@ class UsersController < ApplicationController
   end
 
   def show
-    redirect_to root_path, alert: 'Access denied.' unless current_user == @user
+    access_denied(root_path) unless current_user == @user
   end
 
   def update
   end
 
   def destroy
+    return access_denied(users_path) unless current_user.admin?
+    @user.destroy
+    redirect_to users_path, notice: 'User deleted.'
   end
 
   private
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def access_denied(path)
+    redirect_to path, alert: 'Access denied.'
   end
 end
