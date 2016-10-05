@@ -8,8 +8,10 @@ gem 'devise'
 gem 'high_voltage'
 gem 'sqlite3'
 
+gem 'pry'
+
 group :development do
-  gem 'better_errors'
+  # gem 'better_errors'
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'web-console'
