@@ -172,11 +172,7 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
-<<<<<<< HEAD
-  config.reconfirmable = true
-=======
   config.reconfirmable = false
->>>>>>> origin/solution
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
@@ -218,7 +214,6 @@ Devise.setup do |config|
   # Defines which key will be used when locking and unlocking an account
   # config.unlock_keys = [:email]
 
-  # Defines which strategy will be used to unlock an account.
   # :email = Sends an unlock link to the user email
   # :time  = Re-enables login after a certain amount of time (see :unlock_in below)
   # :both  = Enables both strategies
@@ -261,6 +256,7 @@ Devise.setup do |config|
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
+  # Defines which strategy will be used to unlock an account.
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
   # config.scoped_views = false
