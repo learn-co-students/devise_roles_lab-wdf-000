@@ -2,3 +2,6 @@
 <% if current_user %>
   <p><%= current_user.email %></p>
 <% end %>
+  <% if current_user.admin? %>
+    <%= link_to "Delete", user_path(current_user), method: :delete %>
+<% end %>
