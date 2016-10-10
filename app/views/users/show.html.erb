@@ -1,0 +1,15 @@
+<h1>User Profile</h1>
+<p>Name: <%= @user.name %></p>
+<p>Email: <%= @user.email %></p>
+
+<% if @user.posts.any? %>
+  <h2>Posts</h2>
+  <% @user.posts.each do |post| %>
+    <div>
+      <%= post.content %>
+      <% if @user == current_user || current_user.vip? || current_user.admin? %>
+        <%= link_to 'Edit', edit_post_path(post) %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
