@@ -1,4 +1,7 @@
 <h1>Post <%= @post.id %></h1>
 <p><%= @post.content %></p>
 <br>
-<p>written by <%= @post.user.name %></p>
+<p>written by <%= @post.user.email %></p>
+<% if @post.user == current_user || current_user.vip? || current_user.admin? %>
+  <%= link_to 'Edit', edit_post_path(@post) %>
+<% end %>
