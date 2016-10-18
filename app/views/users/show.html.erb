@@ -1,0 +1,7 @@
+User
+<%= @user.email %>
+<% if !@user %>
+ <% if flash[:message] %>
+ <%= flash[:message] %>
+ <%end %>
+<%end %>

@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
     expect(@user.email).to match 'user@example.com'
   end
 
-  it "#role is 'user' by default" do
+  it "#role  is 'user' by default" do
     expect(@user.role).to eq "user"
   end
 
